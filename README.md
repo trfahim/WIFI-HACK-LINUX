@@ -22,10 +22,10 @@ Ensure you have the required dependencies installed before running the script.
 - **Use Linux Root for better experience**
 
 ## Setup
-- `git clone https://github.com/trfahim/WIFI-HACK-LINUX.gt`
+- `git clone https://github.com/trfahim/WIFI-HACK-LINUX.git`
 - `cd WIFI-HACK-LINIX`
-- `sudo python setup.py`
-- `sudo python wifi-crack.py`
+- `python setup.py`
+- `python wifi-crack.py`
 
 ## Usage
 Bash
