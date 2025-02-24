@@ -20,7 +20,7 @@ def cl():
     os.system("clear" if os.name == "posix" else "cls")
 
 def back_home():
-    b_hm = input(f"{Fore.GREEN}[H] Back Home {Fore.RED}[E] Exit >> {Fore.WHITE}").upper()
+    b_hm = input(f"\n{Fore.GREEN}[H] Back Home {Fore.RED}[E] Exit >> {Fore.WHITE}").upper()
     if b_hm == "E":
         sys.exit(0)
     else:
@@ -39,6 +39,7 @@ def monitor_mode():
         os.system("ifconfig wlan0 down")
         os.system("iwconfig wlan0 mode monitor")
         os.system("ifconfig wlan0 up")
+        #os.system("airmon-ng start wlan0")
 
         result = subprocess.run(["iwconfig"], capture_output=True, text=True)
         if "Mode:Monitor" in result.stdout:
@@ -54,6 +55,7 @@ def wifi_scan(interface):
 
 def start_airodump(interface, bssid, channel, filename):
     file_save = f"/root/Desktop/{filename}"
+    os.system('echo -ne "Devloped by- TR FAHIM"')
     command = f"gnome-terminal -- bash -c 'airodump-ng --channel {channel} --bssid {bssid} --write {file_save} {interface}'"
     subprocess.run(command, shell=True)
 
@@ -99,7 +101,7 @@ def main():
     elif home_input == "2":
         cl()
         banner()
-        interface = input(Fore.LIGHTBLUE_EX + "\nEnter Interface Name [wlan0mon] >>> " + Fore.WHITE)
+        interface = input(Fore.LIGHTBLUE_EX + "\nEnter Interface Name [wlan0] >>> " + Fore.WHITE)
         print(Fore.RED + "\nSTOP THIS PROCESS (CTRL+C)" + Fore.RESET)
         wifi_scan(interface)
         back_home()
@@ -108,7 +110,7 @@ def main():
         cl()
         banner()
         bssid = input(Fore.LIGHTMAGENTA_EX + "\nEnter Target Wifi BSSID >> " + Fore.WHITE)
-        interface = input(Fore.LIGHTBLUE_EX + "Enter Interface Name [wlan0mon] >> " + Fore.WHITE)
+        interface = input(Fore.LIGHTBLUE_EX + "Enter Interface Name [wlan0] >> " + Fore.WHITE)
         channel = input(Fore.YELLOW + "Enter Channel >> " + Fore.WHITE)
         filename = input(Fore.GREEN + "Enter File Name (without extension) >> " + Fore.WHITE)
 
