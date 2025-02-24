@@ -1,4 +1,4 @@
-# TR WIFI CRACKER
+# TR WIFI CRACKER 🔓
 
 TR-WIFI CRACKER is an automated script designed for wireless network security testing. It provides options to enable monitor mode, scan available WiFi networks, start attacks, and convert `.cap` files for password cracking.
 
@@ -18,8 +18,8 @@ Ensure you have the required dependencies installed before running the script.
 - **Linux OS** (Tested on Kali Linux)
 - **Python 3**
 - **Required Packages**:
-- sudo apt install aircrack-ng
-- Use Linux Root for better experience 
+- **sudo apt install aircrack-ng**
+- **Use Linux Root for better experience**
 
 ## Setup
 - `git clone https://github.com/trfahim/WIFI-HACK-LINUX.gt`
@@ -70,7 +70,7 @@ Enter the output .22000 file path: /path/to/output.22000
 
 ## Disclaimer
 
-- This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.
+**This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.**
 
 ## Author
 
