@@ -22,10 +22,10 @@ Ensure you have the required dependencies installed before running the script.
 - Use Linux Root for better experience 
 
 ## Setup
-`git clone https://github.com/trfahim/WIFI-HACK-LINUX.gt`
-`cd WIFI-HACK-LINIX`
-`sudo python setup.py`
-`sudo python wifi-crack.py`
+- `git clone https://github.com/trfahim/WIFI-HACK-LINUX.gt`
+- `cd WIFI-HACK-LINIX`
+- `sudo python setup.py`
+- `sudo python wifi-crack.py`
 
 ## Usage
 Bash
@@ -68,13 +68,13 @@ Enter the path to your .cap file: /path/to/capture.cap
 Enter the output .22000 file path: /path/to/output.22000
 
 
-Disclaimer
+## Disclaimer
 
-This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.
+- This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.
 
-Author
+## Author
 
-Developed by TRFAHIM.
+### Developed by TRFAHIM.
 
 Let me know if you want any modifications!
 
