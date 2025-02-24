@@ -18,7 +18,7 @@ Ensure you have the required dependencies installed before running the script.
 - **Linux OS** (Tested on Kali Linux)
 - **Python 3**
 - **Required Packages**:
-- **sudo apt install aircrack-ng**
+- **apt install aircrack-ng**
 - **Use Linux Root for better experience**
 
 ## Setup
