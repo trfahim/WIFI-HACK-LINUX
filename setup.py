@@ -20,6 +20,6 @@ else:
     os.system("sudo apt install hcxtools")
 
 
-print("\nAll package install suceessful")
+print("\nAll package install sucessful")
 print("Happy Hacking\n")
 os._exit(0)
