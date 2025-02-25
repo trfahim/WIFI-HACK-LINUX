@@ -16,6 +16,7 @@ def home_menu():
     print(f"{Fore.LIGHTYELLOW_EX}[3] {Fore.WHITE}Start Attack")
     print(f"{Fore.GREEN}[4] {Fore.WHITE}Convert Cap File")
     print(f"{Fore.LIGHTBLUE_EX}[5] {Fore.WHITE}Password Genator")
+    print(f"{Fore.LIGHTMAGENTA_EX}[6] {Fore.WHITE}Hash Password Crack")
     print(f"{Fore.RED}[0] {Fore.WHITE}Exit")
 
 def cl():
@@ -373,6 +374,9 @@ def save_file(passwords, file_name="wifi_passlist.txt"):
 
     print(f"\nPasslist save as {file_name}\n")
 
+def hash_crack(list_path, hash_path):
+    command = f"gnome-terminal -- bash -c 'hashcat -m 22000 {hash_path} {list_path}'"
+    subprocess.run(command, shell=True)
 
 def main():
     cl()
@@ -434,8 +438,16 @@ def main():
         password_list = pass_generator(first_nm,middle_nm,last_nm)
 
         save_file(password_list, file_name)
+        back_home()
         
-              
+    elif home_input == "6":
+        cl()
+        banner()
+        hash_path = input(f"\n{Fore.LIGHTYELLOW_EX}Enter Hash file path [hack.22000] >>{Fore.CYAN} ")
+        list_path = input(f"\n{Fore.YELLOW}Enter Password List Path [passlist.txt] >>{Fore.CYAN} ")
+        
+        hash_crack(list_path, hash_path)
+                 
 
 if __name__ == "__main__":
     main()
