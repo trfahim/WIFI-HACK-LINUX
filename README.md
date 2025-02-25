@@ -1,8 +1,8 @@
-# TR WIFI CRACKER 🔓
+# TR WIFI CRACKER 🛜
 
 TR-WIFI CRACKER is an automated script designed for wireless network security testing. It provides options to enable monitor mode, scan available WiFi networks, start attacks, and convert `.cap` files for password cracking.
 
-## Features
+## Features 🔓
 
 - **Monitor Mode**: Enable monitor mode on your wireless adapter.
 - **Scan Available WiFi**: List nearby WiFi networks.
@@ -68,7 +68,7 @@ Enter the path to your .cap file: /path/to/capture.cap
 Enter the output .22000 file path: /path/to/output.22000
 
 
-## Disclaimer
+## Disclaimer ⚠️
 
 **This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.**
 
