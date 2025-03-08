@@ -430,8 +430,8 @@ def main():
     if home_input == "1":
         cl()
         banner()
-        time.sleep(4)
         print(Fore.YELLOW+"\nWait sometimes process loading........")
+        time.sleep(4)
         monitor_mode()
         back_home()
 
