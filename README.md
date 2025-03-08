@@ -10,10 +10,10 @@ TR-WIFI CRACKER is an automated script designed for wireless network security te
 - **Convert Cap File**: Convert `.cap` files to `.22000` format for cracking.
 - **Password Genetor**: Generate bruteforce password list.
 - **Crack Hash**: Crack Wpa Hash.
-- **Show Password**: Show cracked hash passwordm
+- **Show Password**: Show cracked hash password.
 
 ## How to use
-**/https://youtu.be/VNZjFqvj5nc?si=ox4fVPhEeS7AVN-w**
+**https://youtu.be/VNZjFqvj5nc?si=ox4fVPhEeS7AVN-w**
 ## Installation
 Ensure you have the required dependencies installed before running the script.
 
