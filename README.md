@@ -43,6 +43,12 @@ Select an option from the menu:
 
 [4] Convert Cap File
 
+[5] Password Genetor
+
+[6] Crack Hash
+
+[7] Show Crcak Password 
+
 [0] Exit
 
 
@@ -76,7 +82,6 @@ Enter the output .22000 file path: /path/to/output.22000
 
 **This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.**
 
-## Author
 
 ### Developed by TRFAHIM.
 
