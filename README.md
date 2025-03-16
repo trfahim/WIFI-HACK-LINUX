@@ -51,33 +51,6 @@ Select an option from the menu:
 
 [0] Exit
 
-
-## Example Usage
-
-Enable Monitor Mode:
-
-Select option [1]
-
-Scan WiFi Networks:
-
-Select option [2]
-Enter Interface Name [wlan0]: wlan0
-
-Start Attack:
-
-Select option [3]
-Enter Target WiFi BSSID: <BSSID>
-Enter Interface Name: wlan0
-Enter Channel: <Channel>
-Enter File Name (without extension): capture
-
-Convert .cap to .22000:
-
-Select option [4]
-Enter the path to your .cap file: /path/to/capture.cap
-Enter the output .22000 file path: /path/to/output.22000
-
-
 ## Disclaimer ⚠️
 
 **This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.**
