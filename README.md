@@ -26,7 +26,7 @@ Ensure you have the required dependencies installed before running the script.
 - **apt install aircrack-ng**
 - **Use Linux Root for better experience**
 
-## Setup
+# Setup
 - `git clone https://github.com/trfahim/WIFI-HACK-LINUX.git`
 - `cd WIFI-HACK-LINIX`
 - `python setup.py`
