@@ -11,7 +11,7 @@ TR-WIFI CRACKER is an automated script designed for wireless network security te
 - **Password Genetor**: Generate bruteforce password list.
 - **Crack Hash**: Crack Wifi Wpa Hash.
 - **Show Password**: Show cracked hash Wifi password.
-# ⚠️ Important: 
+# Important ⚠️: 
 - **This tool requires a WiFi adapter that supports monitor mode and packet injection. Without a compatible adapter, the script will not work.**
 ## How to use
 **https://youtu.be/VNZjFqvj5nc?si=ox4fVPhEeS7AVN-w**
