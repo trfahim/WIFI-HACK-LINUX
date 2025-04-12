@@ -32,7 +32,7 @@ Ensure you have the required dependencies installed before running the script.
 - `python setup.py`
 - `python wifi-crack.py`
 
-## Usage
+## Menu
 Bash
 Select an option from the menu:
 
