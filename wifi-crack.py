@@ -8,8 +8,8 @@ from colorama import Fore
 def banner():
     text = pyfiglet.figlet_format("TR-WIFI")
     print(f"{Fore.CYAN}{text}")
-    print(Fore.YELLOW + "Developed by - TR FAHIM" + Fore.RESET)
-
+    print(f"{Fore.WHITE}Github: {Fore.YELLOW}trfahim")
+    print(f"{Fore.WHITE}Youtube: {Fore.RED}TR CYBER LAB\n")
 def home_menu():
     print(f"\n\n{Fore.LIGHTBLUE_EX}[1] {Fore.WHITE}Monitor Mode\n")
     print(f"{Fore.LIGHTMAGENTA_EX}[2] {Fore.WHITE}Scan Available Wifi\n")
