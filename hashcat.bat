@@ -4,7 +4,7 @@ color 0A
 cls
 
 :: Set working directory
-set "HASHCAT_DIR=C:\Users\trfah\Downloads\Wifi_Crack\hashcat"
+set "HASHCAT_DIR=(Hashcat file path location here)"
 cd /d "%HASHCAT_DIR%"
 
 echo ================================
