@@ -1,6 +1,7 @@
 # TR WIFI CRACKER 🛜
 
 **TR-WIFI CRACKER is an automated script designed for wireless network security testing. It provides options to enable monitor mode, scan available WiFi networks, start attacks, and convert `.cap` files for password cracking.**
+
 ![image alt](https://github.com/trfahim/WIFI-HACK-LINUX/blob/main/photo.jpg)
 ## Features 🔓
 
