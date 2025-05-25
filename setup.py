@@ -12,6 +12,7 @@ if is_root():
     os.system("apt install gnome-terminal")
     os.system("apt install random string")
     os.system("apt install hashcat")
+    os.system("apt install hcxtools")
 
 else:
     print("\n[+] You are not running as root\n")
@@ -22,6 +23,7 @@ else:
     os.system("sudo apt install gnome-terminal")
     os.system("sudo apt install random string")
     os.system("sudo apt install hashcat")
+    os.system("sudo apt install hcxtools")
 
 print("\nAll package install suceessful")
 print("Happy Hacking !!\n")
