@@ -57,7 +57,6 @@ Select an option from the menu:
 
 **This tool is intended for educational and security auditing purposes only. Unauthorized use against networks you do not own is illegal and unethical. Use it responsibly.**
 
-
 ### Developed by TRFAHIM.
 
 Let me know if you want any modifications!
